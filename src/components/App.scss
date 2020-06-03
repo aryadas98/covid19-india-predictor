@@ -1,0 +1,51 @@
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+
+$hr-background-color: $grey-lighter;
+$navbar-breakpoint: $tablet;
+$navbar-padding-horizontal: 1.5rem;
+$navbar-padding-vertical: 0;
+$navbar-item-hover-background-color: rgba(0,0,0,0);
+
+@import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/components/level.sass";
+@import "../../node_modules/bulma/sass/elements/_all.sass";
+@import "../../node_modules/bulma/sass/layout/section.sass";
+@import "../../node_modules/bulma/sass/components/message.sass";
+
+.level .level-item div .title {
+  margin-bottom: 0.75rem;
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  word-break: break-word;
+}
+
+.has-background-info-light {
+  background: $info-light;
+}
+
+.has-text-danger-dark {
+  color: $danger-dark;
+}
+
+.has-text-info-dark {
+  color: $info-dark;
+}
+
+.has-text-success-dark {
+  color: $success-dark;
+}
