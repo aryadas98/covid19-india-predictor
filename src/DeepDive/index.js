@@ -2,13 +2,13 @@ import React from "react"
 import Layout from "../components/layout"
 import { Fetching, Failed } from "../components/messages"
 
-export default function HowItWorks(props) {
+export default function DeepDive(props) {
   return (
-    <Layout title="How it works">
+    <Layout title="Deep Dive">
       {
         props.data.status === "success" ?
           <>
-            <h1>HowItWorks</h1>
+            <h1>Deep Dive</h1>
           </> :
         props.data.status === "fetching" ?
           <Fetching/> :

@@ -1,67 +1,9 @@
-import React, { useState } from "react";
-import numeral from "numeral";
+import React, { useState } from "react"
+import numeral from "numeral"
+import moment from "moment"
 
-export default function PredTable() {
+export default function PredTable({data,known}) {
   const [term, setTerm] = useState(false);
-
-  const data = [
-    {
-      date: "3/6/20",
-      tplus: 0,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 1,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 2,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 3,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 4,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 5,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-    {
-      date: "3/6/20",
-      tplus: 6,
-      total: { curr: 215980, delta: 8796 },
-      active: { curr: 104477, delta: 3406 },
-      recoveries: { curr: 105448, delta: 5163 },
-      deaths: { curr: 6055, delta: 227 }
-    },
-  ]
 
   const formatStr = "0,0";
   const signFormatStr = "+0,0";
@@ -83,38 +25,38 @@ export default function PredTable() {
       </div>
 
       <div className="table-container">
-        <table className="table is-fullwidth">
+        <table className="table is-fullwidth is-bordered is-striped">
           <thead className="thead">
             <tr>
-              <th className="has-text-centered">Date</th>
-              <th className="has-text-centered">T+</th>
-              <th className="has-text-centered">Total</th>
-              <th className="has-text-centered">Active</th>
-              <th className="has-text-centered">Recoveries</th>
-              <th className="has-text-centered">Deaths</th>
+              <th className="has-text-centered has-background-info-light">Date</th>
+              <th className="has-text-centered has-background-info-light">T+</th>
+              <th className="has-text-centered has-background-info-light">Total</th>
+              <th className="has-text-centered has-background-info-light">Active</th>
+              <th className="has-text-centered has-background-info-light">Recoveries</th>
+              <th className="has-text-centered has-background-info-light">Deaths</th>
             </tr>
           </thead>
           <tbody>
             {
-              data.map(value =>
-                <tr>
-                  <td className="has-text-centered">{value.date}</td>
-                  <td className="has-text-centered">{value.tplus}</td>
+              data.slice(known,known+7).map((value,index) =>
+                <tr key={known+index}>
+                  <td className="has-text-centered">{value.date.format("DD/MM/YY")}</td>
+                  <td className="has-text-centered">{value.date.diff(moment({hours:0}),'days')}</td>
                   <td className="has-text-centered">
-                    {numeral(value.total.curr).format(formatStr)}<br />
-                    <span className="is-size-7">{numeral(value.total.delta).format(signFormatStr)}</span>
+                    {numeral(value.curr.conf).format(formatStr)}<br />
+                    <span className="is-size-7">{numeral(value.delt.conf).format(signFormatStr)}</span>
                   </td>
                   <td className="has-text-centered">
-                    {numeral(value.active.curr).format(formatStr)}<br />
-                    <span className="is-size-7">{numeral(value.active.delta).format(signFormatStr)}</span>
+                    {numeral(value.curr.actv).format(formatStr)}<br />
+                    <span className="is-size-7">{numeral(value.delt.actv).format(signFormatStr)}</span>
                   </td>
                   <td className="has-text-centered">
-                    {numeral(value.recoveries.curr).format(formatStr)}<br />
-                    <span className="is-size-7">{numeral(value.recoveries.delta).format(signFormatStr)}</span>
+                    {numeral(value.curr.recv).format(formatStr)}<br />
+                    <span className="is-size-7">{numeral(value.delt.recv).format(signFormatStr)}</span>
                   </td>
                   <td className="has-text-centered">
-                    {numeral(value.deaths.curr).format(formatStr)}<br />
-                    <span className="is-size-7">{numeral(value.deaths.delta).format(signFormatStr)}</span>
+                    {numeral(value.curr.dead).format(formatStr)}<br />
+                    <span className="is-size-7">{numeral(value.delt.dead).format(signFormatStr)}</span>
                   </td>
                 </tr>
               )

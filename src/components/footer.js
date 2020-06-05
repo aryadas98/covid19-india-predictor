@@ -11,7 +11,7 @@ export default function Footer() {
           <span className="icon"><FontAwesomeIcon icon={faGithub} /></span>
           <span className="icon"><FontAwesomeIcon icon={faTwitter} /></span>
         </p>
-        <p>This site is just a hobby project and does not guarantee to be accurate.</p>
+        <p>This is just a hobby project and does not guarantee to be accurate.</p>
       </div>
     </footer>
   )

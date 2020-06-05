@@ -7,7 +7,7 @@ export default function Layout(props) {
   const appName = "COVID-19 India Predictor";
   const title = props.title?`${props.title} | ${appName}`:appName;
 
-  useEffect(() =>  {document.title = title},[]);
+  useEffect(() =>  {document.title = title},[title]);
 
   return (
     <>

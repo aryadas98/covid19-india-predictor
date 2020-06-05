@@ -34,8 +34,16 @@ main {
   word-break: break-word;
 }
 
+.table * {
+  word-break: normal;
+}
+
 .has-background-info-light {
   background: $info-light;
+}
+
+.has-background-warning-light {
+  background: $danger-light;
 }
 
 .has-text-danger-dark {
@@ -48,4 +56,12 @@ main {
 
 .has-text-success-dark {
   color: $success-dark;
+}
+
+.recharts-default-legend {
+  user-select: none;
+}
+
+.recharts-legend-item {
+  cursor: pointer;
 }
