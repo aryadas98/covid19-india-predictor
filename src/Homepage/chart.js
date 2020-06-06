@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import moment from "moment"
 import numeral from "numeral"
 import {
@@ -13,7 +13,14 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-export default function PredChart({data, known}) {
+import {longTermDuration, longTermSkip} from "../components/constants"
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+
+export default function PredChart({shortTermData,longTermData,term}) {
+
+  const data = term?longTermData:shortTermData;
 
   const cumdata = data.map(v => ({
     date: +v.date,
@@ -25,11 +32,18 @@ export default function PredChart({data, known}) {
 
   const deltdata = data.map(v => ({
     date: +v.date,
-    conf: v.delt.conf,
-    actv: v.delt.actv,
-    recv: v.delt.recv,
-    dead: v.delt.dead
+    conf: v.sdelt?v.sdelt.conf:v.delt.conf,
+    actv: v.sdelt?v.sdelt.actv:v.delt.actv,
+    recv: v.sdelt?v.sdelt.recv:v.delt.recv,
+    dead: v.sdelt?v.sdelt.dead:v.delt.dead
   }))
+
+  for(let i=deltdata.length-1; i>=deltdata.length-longTermDuration/longTermSkip; i--) {
+    deltdata.conf = deltdata.conf/longTermSkip;
+    deltdata.actv = deltdata.actv/longTermSkip;
+    deltdata.recv = deltdata.recv/longTermSkip;
+    deltdata.dead = deltdata.dead/longTermSkip;
+  }
 
   function tooltipFormatter(value) {
     return numeral(value).format("0");
@@ -50,9 +64,14 @@ export default function PredChart({data, known}) {
     dead: true,
     lock: true,
     now: true,
-    scale: false,
-    delt: false
+    scale: localStorage.getItem("scale")==="true",
+    delt: localStorage.getItem("delt")==="true"
   })
+
+  useEffect(() => {
+    localStorage.setItem("scale",state.scale);
+    localStorage.setItem("delt",state.delt);
+  },[state.scale, state.delt]);
 
   function clickHandler(o) {
     const {dataKey} = o;
@@ -62,7 +81,8 @@ export default function PredChart({data, known}) {
   return (
     <div style={{marginBottom: "1rem"}}>
       <p className="notification">
-        Click on legend items to toggle visibility of each series. Hover/click on chart to see exact values.
+        <span className="icon"><FontAwesomeIcon icon={faInfoCircle} size="sm"/>&nbsp;</span>
+        Click on legend items to toggle visibility. Hover/click on chart to see exact values.
       </p>
 
       <ResponsiveContainer width="100%" height={400}>
@@ -78,7 +98,7 @@ export default function PredChart({data, known}) {
             width={40}
             scale={state.scale?"log":"linear"}
             tickFormatter={n => numeral(n).format("0a")}
-            domain={[state.scale?1:"auto","auto"]}
+            domain={[state.scale?1:(d => Math.min(0,Math.floor(d*1.05))),d => Math.floor(d*1.05)]}
             allowDataOverflow
           />
           <CartesianGrid/>
@@ -90,10 +110,10 @@ export default function PredChart({data, known}) {
           {state.now && <ReferenceLine x={+moment()} stroke="purple" label="Now" />}
           {state.lock && lockdowns.map((l,i) => <ReferenceLine key={i} x={+moment(l,"DD MMMM")} stroke="#363636" label={(i+1)} />)}
           <Legend iconType="circle" onClick={clickHandler}/>
-          <Line dataKey={state.conf?"conf":"conf "} stroke="#cc0f35" strokeWidth={2} dot={false} isAnimationActive={false} name="Total" />
-          <Line dataKey={state.actv?"actv":"actv "} stroke="#1d72aa" strokeWidth={2} dot={false} isAnimationActive={false} name="Active" />
-          <Line dataKey={state.recv?"recv":"recv "} stroke="#257942" strokeWidth={2} dot={false} isAnimationActive={false} name="Recoveries" />
-          <Line dataKey={state.dead?"dead":"dead "} stroke="#7a7a7a" strokeWidth={2} dot={false} isAnimationActive={false} name="Deaths" />
+          <Line type="monotoneX" dataKey={state.conf?"conf":"conf "} stroke="#cc0f35" strokeWidth={2} dot={false} isAnimationActive={false} name="Total" />
+          <Line type="monotoneX" dataKey={state.actv?"actv":"actv "} stroke="#1d72aa" strokeWidth={2} dot={false} isAnimationActive={false} name="Active" />
+          <Line type="monotoneX" dataKey={state.recv?"recv":"recv "} stroke="#257942" strokeWidth={2} dot={false} isAnimationActive={false} name="Recoveries" />
+          <Line type="monotoneX" dataKey={state.dead?"dead":"dead "} stroke="#7a7a7a" strokeWidth={2} dot={false} isAnimationActive={false} name="Deaths" />
           
           <Line dataKey="lock" stroke="#363636" strokeWidth={2} dot={false} isAnimationActive={false} name="Lockdowns" />
           <Line dataKey="now" stroke="purple" strokeWidth={2} dot={false} isAnimationActive={false} name="Now" />
@@ -113,12 +133,15 @@ export default function PredChart({data, known}) {
       </div>
       
       <div className="notification">
-        <h4>Lockdowns</h4>
-        <p>25th March: aksdiajsd aisiasdas asoijasdijasdm asiasdim</p>
-        <p>25th March: aksdiajsd aisiasdas asoijasdijasdm asiasdim</p>
-        <p>25th March: aksdiajsd aisiasdas asoijasdijasdm asiasdim</p>
-        <p>25th March: aksdiajsd aisiasdas asoijasdijasdm asiasdim</p>
-        <p>25th March: aksdiajsd aisiasdas asoijasdijasdm asiasdim</p>
+        <b>Lockdowns</b>
+        <ol>
+          <li><b>25 Mar</b>: Almost all factories and services were shut down.</li>
+          <li><b>15 Apr</b>: Some relaxations were made. Areas were classified into red, orange and green zones.</li>
+          <li><b>4 May</b>: Lockdown was extended for 2 weeks.</li>
+          <li><b>18 May</b>: Some more relaxations were made.</li>
+          <li><b>1 June</b>: Major relaations were made. Many shops and services were allowed to be open.</li>
+        </ol>
+        <p>More info: <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline">Wikipedia</a></p>
       </div>
     </div>
   )  

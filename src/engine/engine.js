@@ -1,14 +1,25 @@
 import parse from "./parse"
 import fit from "./fit"
 import predict from "./predict"
+import {
+fittingDuration,
+shortTermStart,
+shortTermEnd,
+longTermDuration,
+longTermSkip
+} from "../components/constants"
 
 export default async function run_engine() {
   const d = await fetch_data();
   const p = parse(d);
-  p.known = p.time_series.length;
-  const coeffs = fit(p.time_series);
   
-  predict(p.time_series,coeffs,10);
+  const coeffs = fit(p.time_series.slice(p.known-fittingDuration));
+  
+  p.shortterm = p.time_series.slice(p.known-shortTermStart);
+  predict(p.shortterm,coeffs,shortTermEnd);
+
+  p.longterm = [...p.time_series];
+  predict(p.longterm,coeffs,longTermDuration,longTermSkip);
 
   p.status = "success";
   console.log(p);

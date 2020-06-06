@@ -3,12 +3,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Homepage from "./Homepage"
 import HowItWorks from "./HowItWorks"
 import HelpfulLinks from "./HelpfulLinks"
-import DeepDive from "./DeepDive"
 
 import run_engine from "./engine/engine"
 
 export default function App() {
   const [data, setData] = useState({status: "fetching"});
+  const [term, setTerm] = useState(localStorage.getItem("term")==="true");
 
   useEffect(() => {
     async function run() {
@@ -18,20 +18,21 @@ export default function App() {
     run();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("term",term);
+  },[term]);
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Homepage data={data}/>
+          <Homepage data={data} term={term} setTerm={setTerm}/>
         </Route>
         <Route path="/helpful-links/">
           <HelpfulLinks />
         </Route>
         <Route path="/how-it-works/">
           <HowItWorks data={data}/>
-        </Route>
-        <Route path="/deep-dive/">
-          <DeepDive data={data}/>
         </Route>
       </Switch>
     </BrowserRouter>

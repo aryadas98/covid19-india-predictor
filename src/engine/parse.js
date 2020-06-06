@@ -39,5 +39,7 @@ export default function parse(data) {
     }
   ))
 
-  return { today, time_series }
+  const known = time_series.length;
+
+  return { today, time_series, known }
 }

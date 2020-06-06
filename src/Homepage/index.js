@@ -7,15 +7,24 @@ import Buttons from "./buttons"
 import Ack from "../components/ack"
 import { Fetching, Failed } from "../components/messages"
 
-export default function Homepage({data}) {
+export default function Homepage({data,term,setTerm}) {
   return (
     <Layout>
       {
         data.status === "success" ?
           <>
             <Banner data={data.today}/>
-            <PredTable data={data.time_series} known={data.known}/>
-            <Chart data={data.time_series} known={data.known}/>
+            <PredTable
+              shortTermData={data.shortterm}
+              longTermData={data.longterm}
+              term={term}
+              setTerm={setTerm}
+            />
+            <Chart
+              shortTermData={data.shortterm}
+              longTermData={data.longterm}
+              term={term}
+            />
             <Ack/>
             <Buttons/>
           </> :

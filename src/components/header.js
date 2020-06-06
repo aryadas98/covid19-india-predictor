@@ -24,7 +24,6 @@ export function Header() {
           <div id="navbarBasic" className={"navbar-menu" + (toggle ? " is-active" : "")}>
             <div className="navbar-end">
               <NavLink to="/" className="navbar-item" activeClassName="is-active" exact>Home</NavLink>
-              <NavLink to="/deep-dive/" className="navbar-item" activeClassName="is-active">Details</NavLink>
               <NavLink to="/how-it-works/" className="navbar-item" activeClassName="is-active">How it Works</NavLink>
               <NavLink to="/helpful-links/" className="navbar-item" activeClassName="is-active">Helpful Links</NavLink>
             </div>

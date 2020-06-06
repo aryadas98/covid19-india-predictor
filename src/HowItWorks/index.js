@@ -2,15 +2,16 @@ import React from "react"
 import Layout from "../components/layout"
 import { Fetching, Failed } from "../components/messages"
 
-export default function HowItWorks(props) {
+export default function HowItWorks({data}) {
   return (
     <Layout title="How it works">
       {
-        props.data.status === "success" ?
+        data.status === "success" ?
           <>
-            <h1>HowItWorks</h1>
+            <h1>How it works</h1>
+            <p>Under construction</p>
           </> :
-        props.data.status === "fetching" ?
+        data.status === "fetching" ?
           <Fetching/> :
         <Failed/>
       }
