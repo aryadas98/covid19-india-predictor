@@ -141,7 +141,11 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <li><b>18 May</b>: Some more relaxations were made.</li>
           <li><b>1 June</b>: Major relaations were made. Many shops and services were allowed to be open.</li>
         </ol>
-        <p>More info: <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline">Wikipedia</a></p>
+        <p>More info:&nbsp;
+          <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline" target="_blank" rel="noopener noreferrer nofollow">
+            Wikipedia
+          </a>
+        </p>
       </div>
     </div>
   )  

@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import Banner from "./banner"
 import PredTable from "./predTable"
 import Chart from "./chart"
-import Buttons from "./buttons"
+import Buttons from "../components/buttons"
 import Ack from "../components/ack"
 import { Fetching, Failed } from "../components/messages"
 
