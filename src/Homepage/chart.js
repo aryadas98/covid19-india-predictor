@@ -97,7 +97,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <YAxis
             width={40}
             scale={state.scale?"log":"linear"}
-            tickFormatter={n => numeral(n).format("0a")}
+            tickFormatter={n => numeral(n).format("0a").toUpperCase()}
             domain={[state.scale?1:(d => Math.min(0,Math.floor(d*1.05))),d => Math.floor(d*1.05)]}
             allowDataOverflow
           />

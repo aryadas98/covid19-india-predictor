@@ -1,17 +1,22 @@
 import React from "react"
 import Layout from "../components/layout"
 import { Fetching, Failed } from "../components/messages"
+import Buttons from "../components/buttons"
+import Ack from "../components/ack"
 
-export default function HowItWorks({data}) {
+import Content from "./content"
+
+export default function HowItWorks({coeffs, status}) {
   return (
     <Layout title="How it works">
       {
-        data.status === "success" ?
+        status === "success" ?
           <>
-            <h1>How it works</h1>
-            <p>Under construction</p>
+            <Content coeffs={coeffs}/>
+            <Ack/>
+            <Buttons/>
           </> :
-        data.status === "fetching" ?
+        status === "fetching" ?
           <Fetching/> :
         <Failed/>
       }

@@ -48,6 +48,7 @@ export default function fit(data) {
     as: fc.as,
     bs: fc.bs,
     cs: fc.cs,
-    Ns: fc.Ns
+    Ns: fc.Ns,
+    Ss: fc.Ss
   }
 }

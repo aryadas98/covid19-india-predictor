@@ -21,9 +21,9 @@ export default async function run_engine() {
   p.longterm = [...p.time_series];
   predict(p.longterm,coeffs,longTermDuration,longTermSkip);
 
+  p.coeffs = {...coeffs};
   p.status = "success";
-  console.log(p);
-  console.log(coeffs);
+
   return p;
 }
 

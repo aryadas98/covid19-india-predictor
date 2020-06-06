@@ -32,7 +32,7 @@ export default function App() {
           <HelpfulLinks />
         </Route>
         <Route path="/how-it-works/">
-          <HowItWorks data={data}/>
+          <HowItWorks coeffs={data.coeffs} status={data.status}/>
         </Route>
       </Switch>
     </BrowserRouter>
