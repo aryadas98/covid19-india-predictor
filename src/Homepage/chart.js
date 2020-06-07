@@ -57,21 +57,23 @@ export default function PredChart({shortTermData,longTermData,term}) {
     "1 June"
   ]
 
-  const [state, setState] = useState({
+  const [state, setState] = useState(
+    localStorage.getItem("chartsettings") ? 
+    JSON.parse(localStorage.getItem("chartsettings")) :
+    {
     conf: true,
     actv: true,
     recv: true,
     dead: true,
     lock: true,
     now: true,
-    scale: localStorage.getItem("scale")==="true",
-    delt: localStorage.getItem("delt")==="true"
+    scale: false,
+    delt: false
   })
 
   useEffect(() => {
-    localStorage.setItem("scale",state.scale);
-    localStorage.setItem("delt",state.delt);
-  },[state.scale, state.delt]);
+    localStorage.setItem("chartsettings",JSON.stringify(state));
+  },[state]);
 
   function clickHandler(o) {
     const {dataKey} = o;
@@ -97,7 +99,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <YAxis
             width={40}
             scale={state.scale?"log":"linear"}
-            tickFormatter={n => numeral(n).format("0a").toUpperCase()}
+            tickFormatter={n => numeral(n).format("0[.][0]a").toUpperCase()}
             domain={[state.scale?1:(d => Math.min(0,Math.floor(d*1.05))),d => Math.floor(d*1.05)]}
             allowDataOverflow
           />
@@ -139,7 +141,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <li><b>15 Apr</b>: Some relaxations were made. Areas were classified into red, orange and green zones.</li>
           <li><b>4 May</b>: Lockdown was extended for 2 weeks.</li>
           <li><b>18 May</b>: Some more relaxations were made.</li>
-          <li><b>1 June</b>: Major relaations were made. Many shops and services were allowed to be open.</li>
+          <li><b>1 June</b>: Major relaxations were made.</li>
         </ol>
         <p>More info:&nbsp;
           <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline" target="_blank" rel="noopener noreferrer nofollow">

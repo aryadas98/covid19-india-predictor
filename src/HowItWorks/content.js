@@ -9,7 +9,7 @@ export default function Content({coeffs}) {
     <>
       <h3>How it works</h3>
       <p>This site works on the Susceptible Infectious Removed (SIR) model of epidemiology. 
-        We partition the whole population into 3 classes - <b>Susceptible</b> (those who are prone to getting infected), 
+        We partition the whole population into 3 classes - <b>Susceptible</b> (those who are prone to getting infected),&nbsp;
         <b>Infectious</b> (those who can infect Susceptible people) and <b>Removed</b> (those who have recovered or died).
       </p>
 
