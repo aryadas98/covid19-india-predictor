@@ -13,8 +13,6 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-import {longTermDuration, longTermSkip} from "../components/constants"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 
@@ -37,13 +35,6 @@ export default function PredChart({shortTermData,longTermData,term}) {
     recv: v.sdelt?v.sdelt.recv:v.delt.recv,
     dead: v.sdelt?v.sdelt.dead:v.delt.dead
   }))
-
-  for(let i=deltdata.length-1; i>=deltdata.length-longTermDuration/longTermSkip; i--) {
-    deltdata.conf = deltdata.conf/longTermSkip;
-    deltdata.actv = deltdata.actv/longTermSkip;
-    deltdata.recv = deltdata.recv/longTermSkip;
-    deltdata.dead = deltdata.dead/longTermSkip;
-  }
 
   function tooltipFormatter(value) {
     return numeral(value).format("0");

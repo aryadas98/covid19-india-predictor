@@ -54,7 +54,7 @@ export default function PredTable({shortTermData,longTermData,term,setTerm}) {
             {
               data.map((value,index) =>
                 <tr key={index}>
-                  <td className="has-text-centered">{value.date.format("DD MMM YY")}</td>
+                  <td className="has-text-centered">{value.date.format("DD/MM/YY")}</td>
                   <td className="has-text-centered">{value.date.diff(moment({hours:0}),term?'months':'days')}</td>
                   <td className="has-text-centered">
                     {numeral(value.curr.conf).format(formatStr)}<br />
