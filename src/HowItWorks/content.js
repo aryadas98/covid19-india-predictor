@@ -24,6 +24,12 @@ export default function Content({coeffs}) {
       <p>Here <InlineMath math="S,I,R,D,N"/> are susceptible, infectious, recovered, dead and total population respectively.
          Specifically, <InlineMath math="N=S+I+R+D"/>. And <InlineMath math="\alpha, \beta, \gamma"/> are coefficients that have to be estimated.
       </p>
+       
+      <p>More info on:&nbsp;
+          <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model" target="_blank" rel="noopener noreferrer nofollow">
+            Wikipedia
+          </a>
+      </p>
 
       <p>We estimate the coefficients from historical data as follows:</p>
       <BlockMath math="\begin{aligned}
