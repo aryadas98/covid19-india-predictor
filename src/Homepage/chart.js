@@ -45,7 +45,8 @@ export default function PredChart({shortTermData,longTermData,term}) {
     "15 April",
     "4 May",
     "18 May",
-    "1 June"
+    "1 June",
+    "1 July"
   ]
 
   const [state, setState] = useState(
@@ -126,13 +127,14 @@ export default function PredChart({shortTermData,longTermData,term}) {
       </div>
       
       <div className="notification">
-        <b>Lockdowns</b>
+        <b>Lockdowns/Unlocks</b>
         <ol>
           <li><b>25 Mar</b>: Almost all factories and services were shut down.</li>
           <li><b>15 Apr</b>: Some relaxations were made. Areas were classified into red, orange and green zones.</li>
           <li><b>4 May</b>: Lockdown was extended for 2 weeks.</li>
           <li><b>18 May</b>: Some more relaxations were made.</li>
           <li><b>1 June</b>: Major relaxations were made.</li>
+          <li><b>1 July</b>: Most activities are permitted in areas other than containment areas.</li>
         </ol>
         <p>More info:&nbsp;
           <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline" target="_blank" rel="noopener noreferrer nofollow">
