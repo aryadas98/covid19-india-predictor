@@ -135,6 +135,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <li><b>18 May</b>: Some more relaxations were made.</li>
           <li><b>1 June</b>: Major relaxations were made.</li>
           <li><b>1 July</b>: Most activities are permitted in areas other than containment areas.</li>
+          <li><b>1 August</b>: Night curfew removed. Gyms allowed to open.</li>
         </ol>
         <p>More info:&nbsp;
           <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline" target="_blank" rel="noopener noreferrer nofollow">
