@@ -46,7 +46,8 @@ export default function PredChart({shortTermData,longTermData,term}) {
     "4 May",
     "18 May",
     "1 June",
-    "1 July"
+    "1 July",
+    "1 August"
   ]
 
   const [state, setState] = useState(
