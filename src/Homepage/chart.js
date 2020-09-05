@@ -47,7 +47,8 @@ export default function PredChart({shortTermData,longTermData,term}) {
     "18 May",
     "1 June",
     "1 July",
-    "1 August"
+    "1 August",
+    "1 September"
   ]
 
   const [state, setState] = useState(
@@ -137,6 +138,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
           <li><b>1 June</b>: Major relaxations were made.</li>
           <li><b>1 July</b>: Most activities are permitted in areas other than containment areas.</li>
           <li><b>1 August</b>: Night curfew removed. Gyms allowed to open.</li>
+          <li><b>1 September</b>: Unlock 4.0</li>
         </ol>
         <p>More info:&nbsp;
           <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic_lockdown_in_India#Timeline" target="_blank" rel="noopener noreferrer nofollow">
