@@ -35,7 +35,7 @@ export default function parse(data) {
         dead: +v.dailydeceased,
         actv: +v.dailyconfirmed - +v.dailyrecovered - +v.dailydeceased
       },
-      date: moment(v.date, "DD MMMM")
+      date: moment(v.dateymd, "YYYY-MM-DD")
     }
   ))
 

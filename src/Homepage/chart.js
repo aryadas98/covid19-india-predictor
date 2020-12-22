@@ -103,7 +103,7 @@ export default function PredChart({shortTermData,longTermData,term}) {
             labelFormatter={t => moment(t).format("DD MMM YY")}
             isAnimationActive={false}
           />
-          {state.now && <ReferenceLine x={+moment()} stroke="purple" label="Now" />}
+          {state.now && <ReferenceLine x={+(moment().subtract(1,'days'))} stroke="purple" label="Now" />}
           {state.lock && lockdowns.map((l,i) => <ReferenceLine key={i} x={+moment(l,"DD MMMM")} stroke="#363636" label={(i+1)} />)}
           <Legend iconType="circle" onClick={clickHandler}/>
           <Line type="monotoneX" dataKey={state.conf?"conf":"conf "} stroke="#cc0f35" strokeWidth={2} dot={false} isAnimationActive={false} name="Total" />
